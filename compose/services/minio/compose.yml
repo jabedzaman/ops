@@ -1,0 +1,24 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    command: server /data --console-address ":9001"
+    volumes:
+      - ./minio-data:/data
+    restart: unless-stopped
+    env_file:
+      - ./minio.env
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.minio.service=minio"
+      - "traefik.http.routers.minio.rule=Host(`s3.jabed.dev`)"
+      - "traefik.http.routers.minio.entrypoints=https"
+      - "traefik.http.routers.minio.tls.certresolver=production"
+      - "traefik.http.services.minio.loadbalancer.server.port=9000"
+
+      - "traefik.http.routers.minio-console.service=minio-console"
+      - "traefik.http.routers.minio-console.rule=Host(`minio.jabed.dev`)"
+      - "traefik.http.routers.minio-console.entrypoints=https"
+      - "traefik.http.routers.minio-console.tls.certresolver=production"
+      - "traefik.http.services.minio-console.loadbalancer.server.port=9001"

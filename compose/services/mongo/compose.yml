@@ -1,6 +1,6 @@
 services:
   mongo:
-    image: mongo:latest
+    image: mongodb/mongodb-atlas-local
     container_name: mongo
     restart: unless-stopped
     volumes:

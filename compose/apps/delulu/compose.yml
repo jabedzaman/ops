@@ -1,0 +1,30 @@
+services:
+  core:
+    image: ghcr.io/kuchi-kuchi/delulu-backend/core:latest
+    env_file:
+      - ./core.env
+    container_name: delulu-core
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.delulu-core.entrypoints=https"
+      - "traefik.http.routers.delulu-core.rule=Host(`delulu-core.jabed.dev`)"
+      - "traefik.http.routers.delulu-core.tls=true"
+      - "traefik.http.routers.delulu-core.tls.certresolver=production"
+      - "traefik.http.routers.delulu-core.service=delulu-core"
+      - "traefik.http.services.delulu-core.loadbalancer.server.port=8000"
+
+  ws:
+    image: ghcr.io/kuchi-kuchi/delulu-backend/ws:main-8bcee0c-arm64
+    env_file:
+      - ./ws.env
+    container_name: delulu-ws
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.delulu-ws.entrypoints=https"
+      - "traefik.http.routers.delulu-ws.rule=Host(`delulu-ws.jabed.dev`)"
+      - "traefik.http.routers.delulu-ws.tls=true"
+      - "traefik.http.routers.delulu-ws.tls.certresolver=production"
+      - "traefik.http.routers.delulu-ws.service=delulu-ws"
+      - "traefik.http.services.delulu-ws.loadbalancer.server.port=4000"
