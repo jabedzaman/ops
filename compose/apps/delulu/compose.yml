@@ -15,7 +15,7 @@ services:
       - "traefik.http.services.delulu-core.loadbalancer.server.port=8000"
 
   ws:
-    image: ghcr.io/kuchi-kuchi/delulu-backend/ws:main-8bcee0c-arm64
+    image: ghcr.io/kuchi-kuchi/delulu-backend/ws:latest
     env_file:
       - ./ws.env
     container_name: delulu-ws

@@ -1,8 +1,11 @@
 name: "homelab"
 
 include:
+  # services
   - ./services/traefik/compose.yml
   - ./services/redis/compose.yml
   - ./services/mongo/compose.yml
-  - ./apps/delulu/compose.yml
   - ./services/minio/compose.yml
+
+  # apps
+  - ./apps/delulu/compose.yml
