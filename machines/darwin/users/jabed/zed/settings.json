@@ -1,0 +1,44 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "vim_mode": true,
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "project_panel": {
+    "dock": "right"
+  },
+  "icon_theme": "Material Icon Theme",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "terminal": {
+    "font_size": 12.0,
+    "font_family": "Maple Mono NF"
+  },
+  "base_keymap": "VSCode",
+  "cursor_blink": true,
+  "buffer_font_fallbacks": [
+    "Italic"
+  ],
+  "buffer_font_family": "Dank Mono",
+  "file_types": {
+    "dotenv": [
+      ".env*"
+    ]
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "Vesper"
+  }
+}
