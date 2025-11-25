@@ -5,9 +5,10 @@
   gather_facts: yes
 
   tasks:
-    - name: Install K3s with Traefik disabled
+    - name: Install K3s with Traefik & ServiceLB disabled
+      #  curl -sfL https://get.k3s.io | sh -s - --disable=traefik --disable=servicelb
       ansible.builtin.shell: |
-        curl -sfL https://get.k3s.io | sh -s - --disable=traefik
+        curl -sfL https://get.k3s.io | sh -s - --disable=traefik 
       args:
         creates: /usr/local/bin/k3s
 

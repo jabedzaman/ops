@@ -14,6 +14,8 @@ ports:
 
 service:
   type: LoadBalancer
+  annotations:
+    metallb.universe.tf/address-pool: public-ip-pool
 
 ingressRoute:
   dashboard:

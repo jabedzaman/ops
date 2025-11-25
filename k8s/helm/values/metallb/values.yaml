@@ -1,0 +1,17 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: public-ip-pool
+  namespace: metallb
+spec:
+  addresses:
+  - 10.0.0.171/32  # Use your PRIVATE IP
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: public-ip-advertisement
+  namespace: metallb
+spec:
+  ipAddressPools:
+  - public-ip-pool
