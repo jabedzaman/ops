@@ -1,0 +1,72 @@
+---
+- name: Install K3s and configure kubeconfig
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: Install K3s with Traefik disabled
+      ansible.builtin.shell: |
+        curl -sfL https://get.k3s.io | sh -s - --disable=traefik
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Wait for K3s service to be active
+      ansible.builtin.systemd:
+        name: k3s
+        state: started
+        enabled: yes
+
+    - name: Check registered nodes in K3s cluster
+      ansible.builtin.shell: |
+        k3s kubectl get nodes
+      register: k3s_nodes
+      changed_when: false
+
+    - debug:
+        msg: "{{ k3s_nodes.stdout }}"
+
+    - name: Create .kube directory for admin user
+      ansible.builtin.file:
+        path: /home/admin/.kube
+        state: directory
+        owner: admin
+        group: admin
+        mode: '0700'
+
+    - name: Copy kubeconfig to a temporary location with proper privileges
+      ansible.builtin.command:
+        cmd: cp /etc/rancher/k3s/k3s.yaml /tmp/k3s.yaml
+      become: yes
+
+    - name: Change permission so Ansible user can read it
+      ansible.builtin.file:
+        path: /tmp/k3s.yaml
+        mode: '0644'
+      become: yes
+
+    - name: Copy K3s kubeconfig to admin user
+      ansible.builtin.copy:
+        src: /tmp/k3s.yaml
+        dest: /home/admin/.kube/config
+        owner: admin
+        group: admin
+        mode: '0600'
+
+    - name: Remove temporary kubeconfig file
+      ansible.builtin.file:
+        path: /tmp/k3s.yaml
+        state: absent
+      become: yes
+    
+    - name: Extend admin's shell profile to set KUBECONFIG
+      ansible.builtin.lineinfile:
+        path: /home/admin/.bashrc
+        line: 'export KUBECONFIG=$HOME/.kube/config'
+        create: yes
+        state: present
+      become_user: admin
+
+    - name: Inform user to reload shell profile
+      ansible.builtin.debug:
+        msg: "Please run 'source /home/admin/.bashrc' or restart your shell session to apply KUBECONFIG environment variable."
