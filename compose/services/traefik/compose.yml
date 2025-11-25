@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:v2.10
+    image: traefik:v2.11
     container_name: traefik
     restart: unless-stopped
     ports:
@@ -24,6 +24,8 @@ services:
 
       # Dynamic configuration directory
       - ./config:/etc/traefik/config:ro
+    environment:
+      - DOCKER_API_VERSION=1.44
     env_file:
       - ./traefik.env
     labels:

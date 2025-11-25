@@ -6,6 +6,7 @@ include:
   - ./services/redis/compose.yml
   - ./services/mongo/compose.yml
   - ./services/minio/compose.yml
+  - ./services/n8n/compose.yml
 
   # apps
-  - ./apps/delulu/compose.yml
+  # - ./apps/delulu/compose.yml

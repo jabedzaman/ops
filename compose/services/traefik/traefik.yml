@@ -115,6 +115,7 @@ providers:
   docker:
     # -- (Optional) Enable this, if you want to expose all containers automatically
     exposedByDefault: false
+    endpoint: "unix:///var/run/docker.sock"
   file:
     directory: /etc/traefik
     watch: true
