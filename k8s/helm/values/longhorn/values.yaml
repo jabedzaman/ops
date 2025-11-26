@@ -1,0 +1,3 @@
+defaultSettings:
+  allowCollectingLonghornUsageMetrics: false
+  storageOverProvisioningPercentage: 100
