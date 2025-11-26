@@ -22,6 +22,9 @@ ingressRoute:
     enabled: true
     matchRule: Host(`k3s.zaman.lol`)
     entryPoints: ["websecure"]
+    middlewares:
+      - name: dashboard-auth
+        namespace: traefik
 
 additionalArguments:
   - "--certificatesresolvers.cloudflare.acme.email=hi@jabed.dev"

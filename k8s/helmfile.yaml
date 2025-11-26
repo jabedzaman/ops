@@ -1,24 +1,18 @@
 repositories:
   - name: traefik
     url: https://traefik.github.io/charts
-  - name: metallb
-    url: https://metallb.github.io/metallb
+  # - name: metallb
+  #   url: https://metallb.github.io/metallb
+  # - name: sealed-secrets
+  #   url: https://bitnami-labs.github.io/sealed-secrets
 
 releases:
-  - name: metallb
-    namespace: metallb-system
-    chart: metallb/metallb
-    version: ~0.14.0
-    values:
-      - helm/values/metallb/values.yaml
-    # hooks:
-      # - events: ["presync"]
-      #   showlogs: true
-      #   command: "kubectl"
-      #   args:
-      #     - "apply"
-      #     - "-f"
-      #     - "manifests/namespaces/metallb.yaml"
+  # - name: metallb
+  #   namespace: metallb-system
+  #   chart: metallb/metallb
+  #   version: ~0.14.0
+  #   values:
+  #     - helm/values/metallb/values.yaml
 
   - name: traefik
     namespace: traefik
@@ -26,14 +20,7 @@ releases:
     version: ~28.0.0
     values:
       - helm/values/traefik/values.yaml
-    # hooks:
-      # - events: ["presync"]
-      #   showlogs: true
-      #   command: "kubectl"
-      #   args:
-      #     - "apply"
-      #     - "-f"
-      #     - "manifests/namespaces/traefik.yaml"
+    hooks:
       # - events: ["presync"]
       #   showlogs: true
       #   command: "kubectl"
@@ -48,10 +35,21 @@ releases:
       #     - "apply"
       #     - "-f"
       #     - "manifests/secrets/traefik-auth.yaml"
-      # - events: ["postsync"]
-      #   showlogs: true
-      #   command: "kubectl"
-      #   args:
-      #     - "apply"
-      #     - "-f"
-      #     - "middleware/traefik/auth.yaml"
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "middleware/traefik/dashboard-auth.yaml"
+
+  # - name: sealed-secrets
+    # namespace: sealed-secrets
+    # chart: sealed-secrets/sealed-secrets
+    # version: 2.17.9
+    # installed: true
+    # createNamespace: true
+    # values:
+    #   - fullnameOverride: sealed-secrets
+    #     rbac:
+    #       create: true

@@ -1,3 +1,4 @@
+---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -5,4 +6,4 @@ metadata:
   namespace: traefik
 spec:
   basicAuth:
-    secret: traefik-dashboard-auth
+    secret: traefik-dashboard-auth-token

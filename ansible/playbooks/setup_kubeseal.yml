@@ -1,0 +1,46 @@
+---
+- name: Install Kubeseal
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars:
+    kubeseal_version: "0.33.1"  # Update to latest version as needed
+    kubeseal_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }}"
+
+  tasks:
+    - name: Download kubeseal binary
+      ansible.builtin.get_url:
+        url: "https://github.com/bitnami-labs/sealed-secrets/releases/download/v{{ kubeseal_version }}/kubeseal-{{ kubeseal_version }}-linux-{{ kubeseal_arch }}.tar.gz"
+        dest: "/tmp/kubeseal-{{ kubeseal_version }}.tar.gz"
+        mode: '0644'
+
+    - name: Extract kubeseal binary
+      ansible.builtin.unarchive:
+        src: "/tmp/kubeseal-{{ kubeseal_version }}.tar.gz"
+        dest: /tmp
+        remote_src: yes
+
+    - name: Move kubeseal to /usr/local/bin
+      ansible.builtin.copy:
+        src: /tmp/kubeseal
+        dest: /usr/local/bin/kubeseal
+        mode: '0755'
+        remote_src: yes
+
+    - name: Verify kubeseal installation
+      ansible.builtin.command: kubeseal --version
+      register: kubeseal_version_output
+      changed_when: false
+
+    - name: Display kubeseal version
+      ansible.builtin.debug:
+        var: kubeseal_version_output.stdout
+
+    - name: Clean up temporary files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "/tmp/kubeseal-{{ kubeseal_version }}.tar.gz"
+        - /tmp/kubeseal
