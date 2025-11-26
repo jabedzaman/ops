@@ -1,39 +1,36 @@
-1. Add the Traefik Helm repository and update your local Helm chart repository cache:
+# Kubernetes Operations
+
+This directory contains Kubernetes configurations and deployments managed using Helmfile, Helm charts, and static manifests.
+
+## Overview
+
+The setup includes:
+- **Traefik**: Ingress controller and load balancer
+- **MetalLB**: Load balancer for bare-metal Kubernetes clusters
+- **Sealed Secrets**: Controller for managing encrypted secrets
+- **Longhorn**: Distributed block storage for Kubernetes
+
+## Structure
+
+- `helmfile.yaml`: Main Helmfile configuration defining repositories and releases
+- `apps/`: Application-specific Kubernetes manifests
+- `helm/`: Helm chart values and configurations
+- `manifests/`: Static Kubernetes manifests (namespaces, secrets)
+- `middleware/`: Traefik middleware configurations
+
+## Chart Deployments
+
+Helmfile is used to deploy and manage all Helm charts.
+
+To synchronize and apply the configurations, run:
 
 ```bash
-helm repo add traefik https://traefik.github.io/charts
-helm repo update
+helmfile sync
 ```
 
-2. Install Traefik using Helm with the specified values file:
+And to apply the configurations, run:
 
 ```bash
-helm install traefik traefik/traefik \
-  --namespace traefik \
-  --values helm/values/traefik/values.yaml 
+helmfile apply
 ```
 
-3. After any changes to the values file, upgrade the Traefik installation:
-
-```bash
-helm upgrade traefik traefik/traefik \
-  --namespace traefik \
-  --values helm/values/traefik/values.yaml
-```
-
----
-
-1. Add the MetalLB Helm repository and update your local Helm chart repository cache:
-
-```bash
-helm repo add metallb https://metallb.github.io/metallb
-helm repo update
-```
-
-2. Install MetalLB using Helm with the specified values file:
-
-```bash
-helm install metallb metallb/metallb \
-  --namespace metallb\
-  --create-namespace
-```
