@@ -1,0 +1,36 @@
+# n8n Helm values
+# Using Longhorn for persistent storage
+
+# Timezone
+timezone: "Asia/Kolkata"
+
+# Use existing secret for encryption key
+existingEncryptionKeySecret: n8n-secrets
+
+# Main n8n configuration
+main:
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 2Gi
+    accessMode: ReadWriteOnce
+
+# Resource allocation
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+# Ingress disabled - we'll use Traefik IngressRoute
+ingress:
+  enabled: false
+
+# Disable built-in databases - use external if needed later
+postgresql:
+  enabled: false
+
+redis:
+  enabled: false
