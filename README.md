@@ -18,3 +18,20 @@ This repository documents my infrastructure-as-code configurations for managing 
 - `compose/`: (deprecated) my previous minimal home lab setup using traefik and docker-compose.
 - `k8s/`: k3s homelab management including helm charts and manifests.
 - `machines/`: machine-specific configurations for my macOS and Linux setups.
+
+## Services
+
+- `n8n`: Workflow automation tool 
+- `minio`: S3-compatible object storage server
+- `twingate`: Secure remote access solution
+
+---
+
+Future plans include adding the following services:
+
+- `atlas`: mongo database hosting with atlas
+- `logto`: centralized OIDC provider
+- `gitea`: self-hosted git service + container registry
+- `code-server`: remote VSCode instance
+- `jackett`: torrent indexer
+
