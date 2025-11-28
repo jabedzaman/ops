@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +14,7 @@ spec:
         app: whoami
     spec:
       containers:
-      - name: whoami
-        image: traefik/whoami
-        ports:
-        - containerPort: 80
+        - name: whoami
+          image: traefik/whoami
+          ports:
+            - containerPort: 80

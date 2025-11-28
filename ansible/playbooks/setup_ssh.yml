@@ -1,22 +1,18 @@
----
 - name: Setup SSH for admin user only
   hosts: all
-  become: yes
-  gather_facts: yes
-
+  become: 'yes'
+  gather_facts: 'yes'
   tasks:
     - name: Disable SSH password authentication
       ansible.builtin.lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^PasswordAuthentication'
         line: 'PasswordAuthentication no'
-        backup: yes
-
+        backup: 'yes'
     - name: Restart SSH service to apply changes
       ansible.builtin.service:
         name: ssh
         state: restarted
-
     - name: Ensure .ssh directory exists
       ansible.builtin.file:
         path: "/home/admin/.ssh"
@@ -24,7 +20,6 @@
         owner: admin
         group: admin
         mode: '0700'
-
     - name: Copy public key to authorized_keys
       ansible.builtin.copy:
         src: authorized_keys

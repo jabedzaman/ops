@@ -1,21 +1,16 @@
----
 - name: Install Helm
   hosts: all
-  become: yes
-  gather_facts: yes
-
+  become: 'yes'
+  gather_facts: 'yes'
   tasks:
     - name: Download Helm installation script
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
         dest: /tmp/get-helm-3
         mode: '0755'
-
     - name: Run Helm install script
       ansible.builtin.shell: /tmp/get-helm-3
-
     - name: Verify Helm installation
       ansible.builtin.command: helm version
       register: helm_version
       changed_when: false
-

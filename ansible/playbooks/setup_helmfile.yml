@@ -1,95 +1,84 @@
----
-- name: Install Helmfile 
+- name: Install Helmfile
   hosts: all
-  become: yes
+  become: 'yes'
   vars:
-    helmfile_version: "v1.2.1"  # Change this to the desired version or use "latest"
-    helmfile_arch: "arm64"  # Options: amd64, arm64, 386
+    helmfile_version: "v1.2.1"
+    helmfile_arch: "arm64"
     helmfile_install_path: "/usr/local/bin"
-    
   tasks:
     - name: Check if helmfile is already installed
       stat:
         path: "{{ helmfile_install_path }}/helmfile"
       register: helmfile_bin
-
     - name: Get current helmfile version if installed
       command: "{{ helmfile_install_path }}/helmfile version --short"
       register: current_version
       when: helmfile_bin.stat.exists
       changed_when: false
       failed_when: false
-
     - name: Get latest helmfile version from GitHub
       uri:
         url: https://api.github.com/repos/helmfile/helmfile/releases/latest
-        return_content: yes
+        return_content: 'yes'
       register: latest_release
       when: helmfile_version == "latest"
-
     - name: Set helmfile version to latest
       set_fact:
         helmfile_version: "{{ latest_release.json.tag_name }}"
       when: helmfile_version == "latest"
-
     - name: Display version to be installed
       debug:
         msg: "Installing helmfile version {{ helmfile_version }}"
-
     - name: Create temporary download directory
       tempfile:
         state: directory
         suffix: helmfile
       register: temp_dir
-
     - name: Set version without 'v' prefix for download URL
       set_fact:
         helmfile_version_clean: "{{ helmfile_version | regex_replace('^v', '') }}"
-
     - name: Download helmfile binary
       get_url:
-        url: "https://github.com/helmfile/helmfile/releases/download/{{ helmfile_version }}/helmfile_{{ helmfile_version_clean }}_linux_{{ helmfile_arch }}.tar.gz"
+        url: "https://github.com/helmfile/helmfile/releases/download/{{ helmfile_version\
+          \ }}/helmfile_{{ helmfile_version_clean }}_linux_{{ helmfile_arch }}.tar.gz"
         dest: "{{ temp_dir.path }}/helmfile.tar.gz"
         mode: '0644'
-      when: not helmfile_bin.stat.exists or (current_version.stdout is defined and helmfile_version not in current_version.stdout)
-
+      when: not helmfile_bin.stat.exists or (current_version.stdout is defined and
+        helmfile_version not in current_version.stdout)
     - name: Extract helmfile binary
       unarchive:
         src: "{{ temp_dir.path }}/helmfile.tar.gz"
         dest: "{{ temp_dir.path }}"
-        remote_src: yes
-      when: not helmfile_bin.stat.exists or (current_version.stdout is defined and helmfile_version not in current_version.stdout)
-
+        remote_src: 'yes'
+      when: not helmfile_bin.stat.exists or (current_version.stdout is defined and
+        helmfile_version not in current_version.stdout)
     - name: Install helmfile to PATH
       copy:
         src: "{{ temp_dir.path }}/helmfile"
         dest: "{{ helmfile_install_path }}/helmfile"
         mode: '0755'
-        remote_src: yes
-      when: not helmfile_bin.stat.exists or (current_version.stdout is defined and helmfile_version not in current_version.stdout)
-
+        remote_src: 'yes'
+      when: not helmfile_bin.stat.exists or (current_version.stdout is defined and
+        helmfile_version not in current_version.stdout)
     - name: Clean up temporary directory
       file:
         path: "{{ temp_dir.path }}"
         state: absent
       when: temp_dir.path is defined
-
     - name: Verify helmfile installation
       command: helmfile version
       register: helmfile_version_output
       changed_when: false
-
     - name: Display helmfile version
       debug:
         msg: "{{ helmfile_version_output.stdout }}"
-
     - name: Check if helm is installed
       command: which helm
       register: helm_check
       changed_when: false
       failed_when: false
-
     - name: Warning if helm is not installed
       debug:
-        msg: "WARNING: Helm is not installed. Helmfile requires Helm to function. Please install Helm first."
+        msg: "WARNING: Helm is not installed. Helmfile requires Helm to function.\
+          \ Please install Helm first."
       when: helm_check.rc != 0

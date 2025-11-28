@@ -1,7 +1,5 @@
----
 deployment:
   replicas: 1
-
 ports:
   web:
     port: 80
@@ -11,12 +9,10 @@ ports:
     exposedPort: 443
     http3:
       enabled: true
-
 service:
   type: LoadBalancer
   annotations:
     metallb.universe.tf/address-pool: public-ip-pool
-
 ingressRoute:
   dashboard:
     enabled: true
@@ -25,25 +21,21 @@ ingressRoute:
     middlewares:
       - name: dashboard-auth
         namespace: traefik
-
 additionalArguments:
   - "--certificatesresolvers.cloudflare.acme.email=hi@jabed.dev"
   - "--certificatesresolvers.cloudflare.acme.storage=/data/acme.json"
   - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
   - "--certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
-
 env:
   - name: CF_DNS_API_TOKEN
     valueFrom:
       secretKeyRef:
         name: cloudflare-api-token
         key: token
-
 persistence:
   enabled: true
   path: /data
   size: 128Mi
-
 logs:
   general:
     level: INFO

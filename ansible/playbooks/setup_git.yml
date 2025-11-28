@@ -1,19 +1,15 @@
----
 - name: Setup Git config for user
   hosts: all
-  become: yes
-  gather_facts: yes
-
+  become: 'yes'
+  gather_facts: 'yes'
   vars:
     git_user: admin
     git_name: jabedzaman
     git_email: hi@jabed.dev
-
   tasks:
     - name: Set global Git username
       ansible.builtin.command: git config --global user.name "{{ git_name }}"
       become_user: "{{ git_user }}"
-
     - name: Set global Git email
       ansible.builtin.command: git config --global user.email "{{ git_email }}"
       become_user: "{{ git_user }}"

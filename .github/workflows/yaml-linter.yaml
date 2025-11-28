@@ -1,22 +1,18 @@
 name: YAML Linter and Kubernetes Manifest Validator
-on:
+'on':
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-    
+    branches: [main]
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Install yamllint
         run: pip install yamllint
-
       - name: Lint YAML files
         run: yamllint k8s/ --config-file .yamllint
-
       - name: Validate Kubernetes manifests
         uses: instrumenta/kubeval-action@master
         with:

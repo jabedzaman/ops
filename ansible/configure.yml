@@ -1,8 +1,7 @@
----
- - import_playbook: playbooks/setup_ssh.yml
- - import_playbook: playbooks/setup_ufw.yml
- - import_playbook: playbooks/setup_git.yml
- - import_playbook: playbooks/setup_k3s.yml
- - import_playbook: playbooks/setup_helm.yml
- - import_playbook: playbooks/setup_helmfile.yml
- - import_playbook: playbooks/setup_kubeseal.yml
+- import_playbook: playbooks/setup_ssh.yml
+- import_playbook: playbooks/setup_ufw.yml
+- import_playbook: playbooks/setup_git.yml
+- import_playbook: playbooks/setup_k3s.yml
+- import_playbook: playbooks/setup_helm.yml
+- import_playbook: playbooks/setup_helmfile.yml
+- import_playbook: playbooks/setup_kubeseal.yml

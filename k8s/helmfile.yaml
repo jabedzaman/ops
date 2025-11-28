@@ -7,15 +7,7 @@ repositories:
     url: https://bitnami-labs.github.io/sealed-secrets
   - name: longhorn
     url: https://charts.longhorn.io
-
 releases:
-  # - name: metallb
-  #   namespace: metallb-system
-  #   chart: metallb/metallb
-  #   version: ~0.14.0
-  #   values:
-  #     - helm/values/metallb/values.yaml
-
   - name: traefik
     namespace: traefik
     chart: traefik/traefik
@@ -23,20 +15,6 @@ releases:
     values:
       - helm/values/traefik/values.yaml
     hooks:
-      # - events: ["presync"]
-      #   showlogs: true
-      #   command: "kubectl"
-      #   args:
-      #     - "apply"
-      #     - "-f"
-      #     - "manifests/secrets/cloudflare-api-token.yaml"
-      # - events: ["presync"]
-      #   showlogs: true
-      #   command: "kubectl"
-      #   args:
-      #     - "apply"
-      #     - "-f"
-      #     - "manifests/secrets/traefik-auth.yaml"
       - events: ["presync"]
         showlogs: true
         command: "kubectl"
@@ -44,7 +22,6 @@ releases:
           - "apply"
           - "-f"
           - "middleware/traefik/dashboard-auth.yaml"
-
   - name: sealed-secrets
     namespace: sealed-secrets
     chart: sealed-secrets/sealed-secrets
@@ -55,7 +32,6 @@ releases:
       - fullnameOverride: sealed-secrets
         rbac:
           create: true
-  
   - name: longhorn
     namespace: longhorn-system
     chart: longhorn/longhorn
@@ -67,6 +43,5 @@ releases:
       - events: ["postsync"]
         showlogs: true
         command: "kubectl"
-        args: ["wait", "--namespace=longhorn-system", "--for=condition=ready", "pod", "-l=app=longhorn-manager", "--timeout=300s"]
-
-
+        args: ["wait", "--namespace=longhorn-system", "--for=condition=ready", "pod",
+          "-l=app=longhorn-manager", "--timeout=300s"]

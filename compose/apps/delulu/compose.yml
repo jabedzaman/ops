@@ -13,7 +13,6 @@ services:
       - "traefik.http.routers.delulu-core.tls.certresolver=production"
       - "traefik.http.routers.delulu-core.service=delulu-core"
       - "traefik.http.services.delulu-core.loadbalancer.server.port=8000"
-
   ws:
     image: ghcr.io/kuchi-kuchi/delulu-backend/ws:latest
     env_file:

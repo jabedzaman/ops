@@ -1,60 +1,24 @@
 global:
   checkNewVersion: false
   sendAnonymousUsage: false
-
-# -- (Optional) Change Log Level and Format here...
-#     - loglevels [DEBUG, INFO, WARNING, ERROR, CRITICAL]
-#     - format [common, json, logfmt]
 log:
   level: DEBUG
   format: json
   filePath: /etc/traefik/log/traefik.log
-
-# -- (Optional) Enable Accesslog and change Format here...
-#     - format [common, json, logfmt]
 accesslog:
   format: json
   filePath: /etc/traefik/log/access.log
-
-# tracing: {}
-#  addInternals: true
-#  sampleRate: 1
-
-# metrics:
-  # prometheus:
-  #   entrypoint: metrics
-  #   addRoutersLabels: true
-  #   buckets:
-  #     - 0.1
-  #     - 0.3
-  #     - 1.2
-  #     - 5.0
-
-# -- (Optional) Enable API and Dashboard here, don't do in production
 api:
   dashboard: true
-#  insecure: true
-
-# -- Change EntryPoints here...
 entryPoints:
   http:
     address: :80
-    # -- (Optional) Redirect all HTTP to HTTPS
-    # http:
-    #   redirections:
-    #     entryPoint:
-    #       to: websecure
-    #       scheme: https
   https:
     address: :443
   metrics:
     address: :9091
-  # -- (Optional) Dashboard does this on it's own. Leave it alone.
-  #  custom:
-  #    address: :8080
-  postgres: # postgres database 
+  postgres:
     address: :5432
-
 http:
   routers:
     dashboard:
@@ -65,18 +29,13 @@ http:
       tls:
         certResolver: production
         domains:
-        #  - main: "jabed.dev"
-         - sans: "*.jabed.dev"
-        #  - sans: "local.jabed.dev"
-        #  - sans: "*.local.jabed.dev"
+          - sans: "*.jabed.dev"
       middlewares:
         - basic-auth
   middlewares:
     basic-auth:
       basicAuth:
         usersFile: /etc/traefik/users/users
-
-# -- Configure your CertificateResolver here...
 certificatesResolvers:
   staging:
     acme:
@@ -108,12 +67,10 @@ certificatesResolvers:
     acme:
       email: hi@jabed.dev
       storage: /etc/traefik/certs/acme-generic.json
-      # tlsChallenge: {}
       httpChallenge:
         entryPoint: http
 providers:
   docker:
-    # -- (Optional) Enable this, if you want to expose all containers automatically
     exposedByDefault: false
     endpoint: "unix:///var/run/docker.sock"
   file:
