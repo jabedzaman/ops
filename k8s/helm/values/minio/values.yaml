@@ -1,0 +1,42 @@
+# MinIO Helm values
+# Using Longhorn for persistent storage
+
+# Mode: standalone (single server) or distributed
+mode: standalone
+
+# Use existing secret for root credentials
+existingSecret: minio-credentials
+
+# Persistence configuration with Longhorn
+persistence:
+  enabled: true
+  storageClass: longhorn
+  size: 50Gi
+  accessMode: ReadWriteOnce
+
+# Resource allocation
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 250m
+  limits:
+    memory: 1Gi
+    cpu: 500m
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 9000
+  consolePort: 9001
+
+# Console (Web UI) configuration
+consoleService:
+  type: ClusterIP
+  port: 9001
+
+# Ingress disabled - we'll use Traefik IngressRoute
+ingress:
+  enabled: false
+
+consoleIngress:
+  enabled: false

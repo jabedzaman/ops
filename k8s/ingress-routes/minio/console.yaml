@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: minio-console
+  namespace: minio
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`minio.zaman.lol`)
+      kind: Rule
+      services:
+        - name: minio-console
+          port: 9001
+  tls:
+    certResolver: cloudflare

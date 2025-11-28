@@ -1,0 +1,3 @@
+connector:
+  network: "jabed"
+  existingSecret: "twingate-connector-credentials"

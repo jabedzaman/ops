@@ -1,0 +1,8 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: longhorn-dashboard-auth
+  namespace: longhorn-system
+spec:
+  basicAuth:
+    secret: longhorn-dashboard-auth-token

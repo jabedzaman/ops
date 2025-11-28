@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-dashboard
+  namespace: longhorn-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`longhorn.zaman.lol`)
+      kind: Rule
+      services:
+        - name: longhorn-frontend
+          port: 80
+      middlewares:
+        - name: longhorn-dashboard-auth
+          namespace: longhorn-system
+  tls:
+    certResolver: cloudflare

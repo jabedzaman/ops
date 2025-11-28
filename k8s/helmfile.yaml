@@ -7,6 +7,10 @@ repositories:
     url: https://bitnami-labs.github.io/sealed-secrets
   - name: longhorn
     url: https://charts.longhorn.io
+  - name: twingate
+    url: https://twingate.github.io/helm-charts
+  - name: minio
+    url: https://charts.min.io/
 releases:
   - name: traefik
     namespace: traefik
@@ -43,5 +47,53 @@ releases:
       - events: ["postsync"]
         showlogs: true
         command: "kubectl"
-        args: ["wait", "--namespace=longhorn-system", "--for=condition=ready", "pod",
-          "-l=app=longhorn-manager", "--timeout=300s"]
+        args:
+          [
+            "wait",
+            "--namespace=longhorn-system",
+            "--for=condition=ready",
+            "pod",
+            "-l=app=longhorn-manager",
+            "--timeout=300s",
+          ]
+  - name: twingate-master-connector-1
+    namespace: twingate
+    chart: twingate/connector
+    values:
+      - helm/values/twingate/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "manifests/namespaces/twingate.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "manifests/secrets/sealed-secrets/sealed-secret-twingate-connector.yaml"
+  - name: minio
+    namespace: minio
+    chart: minio/minio
+    version: ~5.2.0
+    values:
+      - helm/values/minio/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "manifests/namespaces/minio.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "manifests/secrets/sealed-secrets/sealed-secret-minio-credentials.yaml"
