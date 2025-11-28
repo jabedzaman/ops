@@ -1,7 +1,0 @@
-name: "homelab"
-include:
-  - ./services/traefik/compose.yml
-  - ./services/redis/compose.yml
-  - ./services/mongo/compose.yml
-  - ./services/minio/compose.yml
-  - ./services/n8n/compose.yml
