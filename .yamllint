@@ -1,40 +1,11 @@
+---
 extends: default
 
 rules:
-  # Allow longer lines for Kubernetes manifests
-  line-length:
-    max: 120
-    level: warning
-
-  # Enforce 2-space indentation
+  comments-indentation: disable
   indentation:
     spaces: 2
     indent-sequences: true
-    check-multi-line-strings: false
-
-  # Allow comments at any indentation
-  comments-indentation: disable
-
-  # Allow empty lines
-  empty-lines:
-    max-start: 2
-    max-end: 1
-    max: 2
-
-  # Allow trailing spaces in some cases
-  trailing-spaces: disable
-
-  # Allow multiple documents in one file
-  document-start: disable
-
-  # Allow empty values
-  empty-values: disable
-
-  # Allow hyphens in names
-  hyphens:
-    max-spaces-after: 1
-
-  # Allow colons without spaces
-  colons:
-    max-spaces-after: 1
-    max-spaces-before: 0
+  line-length:
+    max: 160
+    level: warning
