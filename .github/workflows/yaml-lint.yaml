@@ -4,13 +4,17 @@ on:
   push:
     branches: [main]
     paths:
-      - "**.yaml"
-      - "**.yml"
+      - "ansible/**/*.yaml"
+      - "ansible/**/*.yml"
+      - "k8s/**/*.yaml"
+      - "k8s/**/*.yml"
   pull_request:
     branches: [main]
     paths:
-      - "**.yaml"
-      - "**.yml"
+      - "ansible/**/*.yaml"
+      - "ansible/**/*.yml"
+      - "k8s/**/*.yaml"
+      - "k8s/**/*.yml"
 
 jobs:
   lint:
@@ -23,5 +27,8 @@ jobs:
       - name: Install yamllint
         run: pip install yamllint
 
-      - name: Lint YAML files
-        run: yamllint . --config-file .yamllint
+      - name: Lint Ansible YAML files
+        run: yamllint ansible/ --config-file .yamllint
+
+      - name: Lint Kubernetes YAML files
+        run: yamllint k8s/ --config-file .yamllint
