@@ -1,0 +1,37 @@
+name: Kubernetes Manifest Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "k8s/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "k8s/**"
+
+jobs:
+  validate:
+    name: Validate Kubernetes Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Kubeconform
+        uses: bmuschko/setup-kubeconform@v1
+
+      - name: Validate Kubernetes manifests
+        run: |
+          kubeconform -summary -output json \
+            -schema-location default \
+            -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
+            -skip SealedSecret,IngressRoute,Middleware \
+            k8s/manifests/
+
+      - name: Validate Helm values (syntax check)
+        run: |
+          for file in $(find k8s/helm/values -name "*.yaml" -type f); do
+            echo "Checking $file..."
+            python3 -c "import yaml; yaml.safe_load(open('$file'))"
+          done
