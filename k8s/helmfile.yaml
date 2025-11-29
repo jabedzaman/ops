@@ -74,7 +74,7 @@ releases:
   - name: minio
     namespace: minio
     chart: minio/minio
-    version: ~5.2.0
+    version: ~5.4.0
     values:
       - helm/values/minio/values.yaml
     hooks:
