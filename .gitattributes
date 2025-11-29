@@ -1,0 +1,7 @@
+# Mark YAML files as detectable (they're normally not counted)
+*.yaml linguist-detectable
+*.yml linguist-detectable
+
+# for Terraform files
+*.tf linguist-detectable
+*.tfvars linguist-detectable

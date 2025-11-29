@@ -1,0 +1,20 @@
+# Terraform state
+*.tfstate
+*.tfstate.*
+
+# Variables with secrets
+*.tfvars
+!*.tfvars.example
+
+# Provider cache
+.terraform/
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

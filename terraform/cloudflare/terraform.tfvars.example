@@ -1,0 +1,9 @@
+# Cloudflare API token with Zone:DNS:Edit permissions
+# Create at: https://dash.cloudflare.com/profile/api-tokens
+cloudflare_api_token = ""
+
+# Zone ID from Cloudflare dashboard (Overview page, right sidebar)
+cloudflare_zone_id = ""
+
+# Public IP address of your homelab server
+homelab_ip = ""
