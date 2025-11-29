@@ -1,0 +1,77 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        ":semanticCommits",
+        ":automergeMinor",
+        ":automergePatch"
+    ],
+    "timezone": "UTC",
+    "schedule": [
+        "every weekend"
+    ],
+    "labels": [
+        "dependencies"
+    ],
+    "commitMessagePrefix": "chore(deps):",
+    "packageRules": [
+        {
+            "description": "Terraform providers",
+            "matchManagers": [
+                "terraform"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "automerge": true
+        },
+        {
+            "description": "GitHub Actions",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "automerge": true
+        },
+        {
+            "description": "Helm charts",
+            "matchManagers": [
+                "helmv3",
+                "helmfile"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "automerge": false,
+            "labels": [
+                "dependencies",
+                "helm"
+            ]
+        },
+        {
+            "description": "Major updates require manual review",
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "automerge": false,
+            "labels": [
+                "dependencies",
+                "major"
+            ]
+        }
+    ],
+    "terraform": {
+        "enabled": true
+    },
+    "helmv3": {
+        "enabled": true
+    },
+    "github-actions": {
+        "enabled": true
+    }
+}
