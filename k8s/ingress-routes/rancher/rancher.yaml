@@ -1,0 +1,26 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rancher
+  namespace: cattle-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`rancher.zaman.lol`)
+      kind: Rule
+      services:
+        - name: rancher
+          port: 443
+          scheme: https
+          serversTransport: rancher-transport
+  tls:
+    certResolver: cloudflare
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: rancher-transport
+  namespace: cattle-system
+spec:
+  insecureSkipVerify: true

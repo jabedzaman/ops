@@ -1,0 +1,32 @@
+# Rancher Configuration
+# https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster
+
+# Hostname for Rancher UI
+hostname: rancher.zaman.lol
+
+# Number of replicas (1 for single-node homelab)
+replicas: 1
+
+# Bootstrap password for initial admin login
+# Change this after first login!
+bootstrapPassword: "admin"
+
+# Disable built-in ingress - we use Traefik IngressRoute instead
+ingress:
+  enabled: false
+
+# TLS source - external means TLS is handled outside (Traefik/Cloudflare)
+tls: external
+
+# Resource limits for homelab
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+
+# Audit logging (optional)
+auditLog:
+  level: 1

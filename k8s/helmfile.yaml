@@ -11,6 +11,8 @@ repositories:
     url: https://charts.min.io/
   - name: community-charts
     url: https://community-charts.github.io/helm-charts
+  - name: rancher-stable
+    url: https://releases.rancher.com/server-charts/stable
 releases:
   - name: metallb
     namespace: metallb
@@ -111,3 +113,24 @@ releases:
           - "apply"
           - "-f"
           - "manifests/secrets/sealed-secrets/sealed-secret-n8n.yaml"
+  - name: rancher
+    namespace: cattle-system
+    chart: rancher-stable/rancher
+    version: ~2.13.0
+    values:
+      - helm/values/rancher/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "manifests/namespaces/rancher.yaml"
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "ingress-routes/rancher/rancher.yaml"
