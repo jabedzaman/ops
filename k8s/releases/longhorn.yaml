@@ -1,0 +1,22 @@
+bases:
+  - ../bases/repositories.yaml
+
+releases:
+  - name: longhorn
+    namespace: longhorn-system
+    chart: longhorn/longhorn
+    version: ~1.6.0
+    createNamespace: true
+    values:
+      - ../helm/values/longhorn/values.yaml
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "wait"
+          - "--namespace=longhorn-system"
+          - "--for=condition=ready"
+          - "pod"
+          - "-l=app=longhorn-manager"
+          - "--timeout=300s"

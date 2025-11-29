@@ -1,0 +1,25 @@
+bases:
+  - ../bases/repositories.yaml
+
+releases:
+  - name: minio
+    namespace: minio
+    chart: minio/minio
+    version: ~5.2.0
+    values:
+      - ../helm/values/minio/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../manifests/namespaces/minio.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../manifests/secrets/sealed-secrets/sealed-secret-minio-credentials.yaml"

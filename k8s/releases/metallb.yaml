@@ -1,0 +1,17 @@
+bases:
+  - ../bases/repositories.yaml
+
+releases:
+  - name: metallb
+    namespace: metallb
+    chart: metallb/metallb
+    version: ~0.14.0
+    createNamespace: true
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../manifests/metallb/ip-pool.yaml"

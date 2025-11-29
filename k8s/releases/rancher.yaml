@@ -1,0 +1,25 @@
+bases:
+  - ../bases/repositories.yaml
+
+releases:
+  - name: rancher
+    namespace: cattle-system
+    chart: rancher-stable/rancher
+    version: ~2.13.0
+    values:
+      - ../helm/values/rancher/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../manifests/namespaces/rancher.yaml"
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../ingress-routes/rancher/rancher.yaml"

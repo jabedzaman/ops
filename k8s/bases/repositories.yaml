@@ -1,0 +1,15 @@
+repositories:
+  - name: traefik
+    url: https://traefik.github.io/charts
+  - name: metallb
+    url: https://metallb.github.io/metallb
+  - name: sealed-secrets
+    url: https://bitnami-labs.github.io/sealed-secrets
+  - name: longhorn
+    url: https://charts.longhorn.io
+  - name: minio
+    url: https://charts.min.io/
+  - name: community-charts
+    url: https://community-charts.github.io/helm-charts
+  - name: rancher-stable
+    url: https://releases.rancher.com/server-charts/stable

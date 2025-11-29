@@ -1,0 +1,25 @@
+bases:
+  - ../bases/repositories.yaml
+
+releases:
+  - name: n8n
+    namespace: n8n
+    chart: community-charts/n8n
+    version: ~1.16.0
+    values:
+      - ../helm/values/n8n/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../manifests/namespaces/n8n.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../manifests/secrets/sealed-secrets/sealed-secret-n8n.yaml"
