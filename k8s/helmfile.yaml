@@ -54,7 +54,7 @@ releases:
   - name: longhorn
     namespace: longhorn-system
     chart: longhorn/longhorn
-    version: ~1.6.0
+    version: ~1.10.0
     createNamespace: true
     values:
       - helm/values/longhorn/values.yaml
