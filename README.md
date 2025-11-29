@@ -15,7 +15,6 @@ This repository documents my infrastructure-as-code configurations for managing 
 ## Structure
 
 - `ansible/`: ansible playbooks and inventories for quick server configuration and setup.
-- `compose/`: (deprecated) my previous minimal home lab setup using traefik and docker-compose.
 - `k8s/`: k3s homelab management including helm charts and manifests.
 - `machines/`: machine-specific configurations for my macOS and Linux setups.
 
@@ -23,7 +22,6 @@ This repository documents my infrastructure-as-code configurations for managing 
 
 - `n8n`: Workflow automation tool 
 - `minio`: S3-compatible object storage server
-- `twingate`: Secure remote access solution
 
 ---
 

@@ -47,8 +47,7 @@ ops/
 │   │       ├── metallb/     # Bare-metal load balancer
 │   │       ├── minio/       # S3-compatible object storage
 │   │       ├── n8n/         # Workflow automation
-│   │       ├── traefik/     # Ingress controller
-│   │       └── twingate/    # Zero-trust network access
+│   │       └──  traefik/     # Ingress controller
 │   │
 │   ├── manifests/
 │   │   ├── namespaces/      # Namespace definitions
@@ -94,7 +93,6 @@ ops/
 | Secrets | Sealed Secrets | GitOps-friendly encrypted secrets |
 | Object Storage | MinIO | S3-compatible storage |
 | Automation | n8n | Workflow automation platform |
-| VPN/Access | Twingate | Zero-trust network access |
 | DNS/TLS | Cloudflare | DNS management, ACME DNS-01 challenges |
 | Provisioning | Ansible | Server configuration management |
 | Helm Management | Helmfile | Declarative Helm chart deployment |
