@@ -5,7 +5,7 @@ dependencies:
     version: 1.6.4
   - name: metallb
     repository: https://metallb.github.io/metallb
-    version: 0.14.9
+    version: 0.15.2
   - name: minio
     repository: https://charts.min.io/
     version: 5.2.0
@@ -21,5 +21,5 @@ dependencies:
   - name: traefik
     repository: https://traefik.github.io/charts
     version: 28.0.0
-digest: sha256:42db503950a5a907c1570bb382e6448785f80b72f28a816554e3c2e770e1f905
-generated: "2025-11-30T02:26:05.310309851+05:30"
+digest: sha256:ad3aed8f19e2bc4613c52481fb22adc9f1b43cc8b1394359aa914efd9ffa294c
+generated: "2025-11-29T21:00:55.064197025Z"

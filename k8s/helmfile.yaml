@@ -17,7 +17,7 @@ releases:
   - name: metallb
     namespace: metallb
     chart: metallb/metallb
-    version: ~0.14.0
+    version: ~0.15.0
     createNamespace: true
     hooks:
       - events: ["postsync"]
