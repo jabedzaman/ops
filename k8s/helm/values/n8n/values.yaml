@@ -28,6 +28,15 @@ resources:
 ingress:
   enabled: false
 
+# DNS configuration to resolve external domains
+dnsConfig:
+  nameservers:
+    - 8.8.8.8
+    - 1.1.1.1
+  options:
+    - name: ndots
+      value: "1"
+
 # Disable built-in databases - use external if needed later
 postgresql:
   enabled: false
