@@ -9,6 +9,15 @@ existingEncryptionKeySecret: n8n-secrets
 
 # Main n8n configuration
 main:
+  # Editor URL for OAuth callbacks
+  editorBaseUrl: "https://n8n.zaman.lol"
+
+  # Extra environment variables for webhook URL
+  extraEnvVars:
+    WEBHOOK_URL: "https://n8n.zaman.lol/"
+    N8N_PROTOCOL: "https"
+    N8N_HOST: "n8n.zaman.lol"
+
   persistence:
     enabled: true
     storageClass: longhorn
