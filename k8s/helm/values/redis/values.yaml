@@ -1,0 +1,45 @@
+# Redis Helm values (Bitnami chart)
+# Using Longhorn for persistent storage
+
+# Architecture: standalone or replication
+architecture: standalone
+
+# Authentication configuration
+auth:
+  enabled: true
+  existingSecret: redis-credentials
+  existingSecretPasswordKey: redis-password
+
+# Master configuration
+master:
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 2Gi
+    accessModes:
+      - ReadWriteOnce
+
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+    limits:
+      memory: 512Mi
+      cpu: 250m
+
+  service:
+    type: ClusterIP
+    ports:
+      redis: 6379
+
+# Disable replica for standalone mode
+replica:
+  replicaCount: 0
+
+# Metrics configuration (optional)
+metrics:
+  enabled: false
+
+# Network policy
+networkPolicy:
+  enabled: false

@@ -9,6 +9,12 @@ ports:
     exposedPort: 443
     http3:
       enabled: true
+  redis:
+    port: 6379
+    expose:
+      default: true
+    exposedPort: 6379
+    protocol: TCP
 service:
   type: LoadBalancer
   annotations:

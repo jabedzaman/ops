@@ -13,3 +13,5 @@ repositories:
     url: https://community-charts.github.io/helm-charts
   - name: rancher-stable
     url: https://releases.rancher.com/server-charts/stable
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
