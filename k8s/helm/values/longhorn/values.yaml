@@ -1,3 +1,9 @@
 defaultSettings:
   allowCollectingLonghornUsageMetrics: false
   storageOverProvisioningPercentage: 100
+  # Cloudflare R2 backup target (S3-compatible)
+  # Format: s3://<bucket-name>@<region>/
+  # R2 uses 'auto' as the region
+  backupTarget: s3://longhorn-backups@auto/
+  # Reference to the secret containing R2 credentials
+  backupTargetCredentialSecret: longhorn-r2-backup-credentials
