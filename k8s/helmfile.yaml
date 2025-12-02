@@ -5,4 +5,4 @@ bases:
   - bases/repositories.yaml
 
 helmfiles:
-  - path: releases/*.yaml
+  - path: releases/*/release.yaml

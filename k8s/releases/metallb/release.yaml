@@ -1,5 +1,5 @@
 bases:
-  - ../bases/repositories.yaml
+  - ../../bases/repositories.yaml
 
 releases:
   - name: metallb
@@ -14,4 +14,4 @@ releases:
         args:
           - "apply"
           - "-f"
-          - "../manifests/metallb/ip-pool.yaml"
+          - "../../manifests/metallb/ip-pool.yaml"

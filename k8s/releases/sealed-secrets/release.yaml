@@ -1,5 +1,5 @@
 bases:
-  - ../bases/repositories.yaml
+  - ../../bases/repositories.yaml
 
 releases:
   - name: sealed-secrets

@@ -1,5 +1,5 @@
 bases:
-  - ../bases/repositories.yaml
+  - ../../bases/repositories.yaml
 
 releases:
   - name: redis
@@ -7,7 +7,7 @@ releases:
     chart: bitnami/redis
     version: ~24.0.0
     values:
-      - ../helm/values/redis/values.yaml
+      - ../../helm/values/redis/values.yaml
     hooks:
       - events: ["presync"]
         showlogs: true
@@ -15,18 +15,18 @@ releases:
         args:
           - "apply"
           - "-f"
-          - "../manifests/namespaces/redis.yaml"
+          - "../../manifests/namespaces/redis.yaml"
       - events: ["presync"]
         showlogs: true
         command: "kubectl"
         args:
           - "apply"
           - "-f"
-          - "../manifests/secrets/sealed-secrets/sealed-secret-redis-credentials.yaml"
+          - "../../manifests/secrets/sealed-secrets/sealed-secret-redis-credentials.yaml"
       - events: ["postsync"]
         showlogs: true
         command: "kubectl"
         args:
           - "apply"
           - "-f"
-          - "../ingress-routes/redis/redis.yaml"
+          - "../../ingress-routes/redis/redis.yaml"

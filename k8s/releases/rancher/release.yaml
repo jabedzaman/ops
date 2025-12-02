@@ -1,5 +1,5 @@
 bases:
-  - ../bases/repositories.yaml
+  - ../../bases/repositories.yaml
 
 releases:
   - name: rancher
@@ -7,7 +7,7 @@ releases:
     chart: rancher-stable/rancher
     version: ~2.13.0
     values:
-      - ../helm/values/rancher/values.yaml
+      - ../../helm/values/rancher/values.yaml
     hooks:
       - events: ["presync"]
         showlogs: true
@@ -15,11 +15,11 @@ releases:
         args:
           - "apply"
           - "-f"
-          - "../manifests/namespaces/rancher.yaml"
+          - "../../manifests/namespaces/rancher.yaml"
       - events: ["postsync"]
         showlogs: true
         command: "kubectl"
         args:
           - "apply"
           - "-f"
-          - "../ingress-routes/rancher/rancher.yaml"
+          - "../../ingress-routes/rancher/rancher.yaml"

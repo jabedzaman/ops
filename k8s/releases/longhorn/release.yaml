@@ -1,5 +1,5 @@
 bases:
-  - ../bases/repositories.yaml
+  - ../../bases/repositories.yaml
 
 releases:
   - name: longhorn
@@ -8,7 +8,7 @@ releases:
     version: ~1.6.0
     createNamespace: true
     values:
-      - ../helm/values/longhorn/values.yaml
+      - ../../helm/values/longhorn/values.yaml
     hooks:
       - events: ["postsync"]
         showlogs: true
