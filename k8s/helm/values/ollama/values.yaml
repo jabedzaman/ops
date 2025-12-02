@@ -1,0 +1,29 @@
+# Ollama Helm Values
+# Storage provisioned via Longhorn
+
+ollama:
+  gpu:
+    enabled: false
+  # Don't pull models at startup - pull manually or via WebUI
+  models:
+    pull: []
+    run: []
+
+persistentVolume:
+  enabled: true
+  size: 10Gi
+  storageClass: longhorn
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  requests:
+    memory: 10Gi
+    cpu: 2000m
+  limits:
+    memory: 12Gi
+    cpu: 4000m
+
+service:
+  type: ClusterIP
+  port: 11434

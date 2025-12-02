@@ -1,0 +1,18 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: ollama
+    namespace: ollama
+    chart: ollama-helm/ollama
+    version: ~1.0.0
+    values:
+      - ../../helm/values/ollama/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../../manifests/namespaces/ollama.yaml"

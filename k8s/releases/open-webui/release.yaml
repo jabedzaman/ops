@@ -1,0 +1,25 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: open-webui
+    namespace: open-webui
+    chart: open-webui/open-webui
+    version: ~6.0.0
+    values:
+      - ../../helm/values/open-webui/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../../manifests/namespaces/open-webui.yaml"
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../../ingress-routes/open-webui/open-webui.yaml"
