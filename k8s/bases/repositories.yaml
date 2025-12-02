@@ -15,7 +15,3 @@ repositories:
     url: https://releases.rancher.com/server-charts/stable
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
-  - name: ollama-helm
-    url: https://otwld.github.io/ollama-helm/
-  - name: open-webui
-    url: https://helm.openwebui.com/
