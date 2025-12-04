@@ -15,6 +15,12 @@ ports:
       default: true
     exposedPort: 6379
     protocol: TCP
+  mongodb:
+    port: 27017
+    expose:
+      default: true
+    exposedPort: 27017
+    protocol: TCP
 service:
   type: LoadBalancer
   annotations:

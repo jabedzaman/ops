@@ -15,3 +15,5 @@ repositories:
     url: https://releases.rancher.com/server-charts/stable
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
+  - name: mongodb
+    url: https://mongodb.github.io/helm-charts

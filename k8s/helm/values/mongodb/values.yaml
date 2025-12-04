@@ -1,0 +1,18 @@
+# MongoDB Community Operator Helm Values
+# This installs the operator first, then you can deploy MongoDB instances
+
+# Operator configuration
+operator:
+  name: mongodb-kubernetes-operator
+
+# MongoDB instance will be deployed via a separate manifest
+# The operator watches for MongoDBCommunity custom resources
+
+# Resource limits for the operator
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

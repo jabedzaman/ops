@@ -1,0 +1,10 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: mongodb-operator
+    namespace: mongodb
+    chart: mongodb/community-operator
+    version: 0.10.0
+    values:
+      - ../../helm/values/mongodb/values.yaml
