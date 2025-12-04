@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-config
+  namespace: mariadb
+  labels:
+    app: mariadb
+data:
+  my.cnf: |
+    [mysqld]
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/usr
+    datadir=/var/lib/mysql
+    port=3306
+    socket=/run/mysqld/mysqld.sock
+    tmpdir=/tmp
+    max_allowed_packet=64M
+    bind-address=0.0.0.0
+    default_storage_engine=InnoDB
+    innodb_buffer_pool_size=128M
+    innodb_log_file_size=48M
+    innodb_file_per_table=1
+    innodb_flush_method=O_DIRECT
+    character-set-server=utf8mb4
+    collation-server=utf8mb4_unicode_ci
+
+    [client]
+    port=3306
+    socket=/run/mysqld/mysqld.sock
+    default-character-set=utf8mb4
