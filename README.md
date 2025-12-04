@@ -22,13 +22,26 @@ This repository documents my infrastructure-as-code configurations for managing 
 
 ## Services
 
-### Productivity
+### Automation
 
 | Icon | Name | Description | Deployed Via |
 |------|------|-------------|--------------|
 | <img src="https://n8n.io/favicon.ico" width="24" height="24"> | n8n | Workflow automation tool | Helmfile |
-| <img src="https://raw.githubusercontent.com/logto-io/logto/HEAD/logo.png" width="24" height="24"> | Logto (planned) | Centralized OIDC provider | Helmfile |
-| <img src="https://code.visualstudio.com/favicon.ico" width="24" height="24"> | Code Server (planned) | Remote VSCode instance | Helmfile |
+
+### Databases
+
+| Icon | Name | Description | Deployed Via |
+|------|------|-------------|--------------|
+| <img src="https://www.mongodb.com/favicon.ico" width="24" height="24"> | MongoDB (Atlas) | Managed MongoDB database hosting | MongoDB Operator |
+| <img src="https://mariadb.org/favicon.ico" width="24" height="24"> | MariaDB | Relational database service | Kubectl |
+| <img src="https://redis.io/favicon.ico" width="24" height="24"> | Redis | In-memory data structure store | Helmfile |
+
+### Media & Content
+
+| Icon | Name | Description | Deployed Via |
+|------|------|-------------|--------------|
+| <img src="https://raw.githubusercontent.com/Jackett/Jackett/master/src/Jackett.Common/Content/favicon.ico" width="24" height="24"> | Jackett (planned) | Torrent indexer | Helmfile |
+| <img src="https://raw.githubusercontent.com/go-gitea/gitea/main/assets/logo.svg" width="24" height="24"> | Gitea (planned) | Self-hosted Git service + container registry | Helmfile |
 
 ### Monitoring & Management
 
@@ -37,13 +50,11 @@ This repository documents my infrastructure-as-code configurations for managing 
 | <img src="https://raw.githubusercontent.com/rancher/ui/master/public/assets/images/logos/welcome-cow.svg" width="24" height="24"> | Rancher | K8s cluster management platform | Helmfile |
 | <img src="https://traefik.io/favicon.ico" width="24" height="24"> | Whoami | Simple service to display client information | Kubectl |
 
-### Database
+### Security
 
 | Icon | Name | Description | Deployed Via |
 |------|------|-------------|--------------|
-| <img src="https://www.mongodb.com/favicon.ico" width="24" height="24"> | MongoDB (Atlas) | Managed MongoDB database hosting | MongoDB Operator |
-| <img src="https://mariadb.org/favicon.ico" width="24" height="24"> | MariaDB | Relational database service | Kubectl |
-| <img src="https://redis.io/favicon.ico" width="24" height="24"> | Redis | In-memory data structure store | Helmfile |
+| <img src="https://raw.githubusercontent.com/logto-io/logto/HEAD/logo.png" width="24" height="24"> | Logto (planned) | Centralized OIDC provider | Helmfile |
 
 ### Storage
 
@@ -51,10 +62,9 @@ This repository documents my infrastructure-as-code configurations for managing 
 |------|------|-------------|--------------|
 | <img src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg" width="24" height="24"> | MinIO | S3-compatible object storage server | Helmfile |
 
-### Media & Content
+### Tools
 
 | Icon | Name | Description | Deployed Via |
 |------|------|-------------|--------------|
-| <img src="https://raw.githubusercontent.com/Jackett/Jackett/master/src/Jackett.Common/Content/favicon.ico" width="24" height="24"> | Jackett (planned) | Torrent indexer | Helmfile |
-| <img src="https://raw.githubusercontent.com/go-gitea/gitea/main/assets/logo.svg" width="24" height="24"> | Gitea (planned) | Self-hosted Git service + container registry | Helmfile |
+| <img src="https://code.visualstudio.com/favicon.ico" width="24" height="24"> | Code Server (planned) | Remote VSCode instance | Helmfile |
 
