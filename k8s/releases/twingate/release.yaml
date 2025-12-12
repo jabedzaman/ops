@@ -1,0 +1,25 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: twingate-connector
+    namespace: twingate
+    chart: twingate/connector
+    version: ~0.1.0
+    values:
+      - ../../helm/values/twingate/values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../../manifests/namespaces/twingate.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "../../manifests/secrets/sealed-secrets/twingate-connector-credentials.yaml"

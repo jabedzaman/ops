@@ -1,0 +1,23 @@
+# Twingate Connector Configuration
+# Reference the sealed secret for credentials
+
+connector:
+  network: "jabed"
+  # Use existing secret created via sealed-secrets
+  existingSecret: "twingate-connector-credentials"
+  logLevel: "debug" # Maximum verbosity for debugging
+
+# Enable host network to bypass potential CNI/networking issues
+hostNetwork: true
+
+# Use host DNS
+dnsPolicy: ClusterFirstWithHostNet
+
+# Resource requests and limits
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

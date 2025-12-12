@@ -1,0 +1,7 @@
+version: 1.2.1
+dependencies:
+  - name: connector
+    repository: https://twingate.github.io/helm-charts
+    version: 0.1.32
+digest: sha256:8dce3e5adb5c9d1db878c3bd3f336583091f98455831c439d5c388fd5361dfea
+generated: "2025-12-12T05:33:37.175865575+05:30"
