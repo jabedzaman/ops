@@ -50,11 +50,12 @@ This repository documents my infrastructure-as-code configurations for managing 
 | <img src="https://raw.githubusercontent.com/rancher/ui/master/public/assets/images/logos/welcome-cow.svg" width="24" height="24"> | Rancher | K8s cluster management platform | Helmfile |
 | <img src="https://traefik.io/favicon.ico" width="24" height="24"> | Whoami | Simple service to display client information | Kubectl |
 
-### Security
+### Networking & Security
 
 | Icon | Name | Description | Deployed Via |
 |------|------|-------------|--------------|
 | <img src="https://raw.githubusercontent.com/logto-io/logto/HEAD/logo.png" width="24" height="24"> | Logto (planned) | Centralized OIDC provider | Helmfile |
+| <img src="https://cdn.brandfetch.io/idcXXNs4zE/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B" width="24" height="24"> | Twingate Connector | Secure remote access to private network | Helmfile |
 
 ### Storage
 
