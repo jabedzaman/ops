@@ -27,6 +27,10 @@ jobs:
             -schema-location default \
             -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
             -skip SealedSecret,IngressRoute,IngressRouteTCP,Middleware,ServersTransport \
+            -ignore-filename-pattern 'release\.yaml' \
+            -ignore-filename-pattern 'release\.lock' \
+            -ignore-filename-pattern 'values\.yaml' \
+            -ignore-filename-pattern 'secret\.template\.yaml' \
             k8s/apps/ k8s/infra/
 
       - name: Validate Helm values (syntax check)
