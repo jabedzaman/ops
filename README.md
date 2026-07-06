@@ -25,10 +25,11 @@ This repository documents my infrastructure-as-code configurations for managing 
 | Icon | Name | Category | Description | Deployed Via |
 |------|------|----------|-------------|--------------|
 | <img src="https://n8n.io/favicon.ico" width="24" height="24"> | n8n | Automation | Workflow automation tool | Helmfile |
+| <img src="https://coder.com/favicon.ico" width="24" height="24"> | Coder | Dev Tools | Remote development environments | Helmfile |
 | <img src="https://mariadb.org/favicon.ico" width="24" height="24"> | MariaDB | Databases | Relational database service | Kubectl |
 | <img src="https://www.mongodb.com/favicon.ico" width="24" height="24"> | MongoDB | Databases | Managed MongoDB database hosting | MongoDB Operator |
+| <img src="https://www.postgresql.org/favicon.ico" width="24" height="24"> | PostgreSQL | Databases | Relational database for Coder | Helmfile |
 | <img src="https://redis.io/favicon.ico" width="24" height="24"> | Redis | Databases | In-memory data structure store | Helmfile |
-| <img src="https://raw.githubusercontent.com/rancher/ui/master/public/assets/images/logos/welcome-cow.svg" width="24" height="24"> | Rancher | Monitoring & Management | K8s cluster management platform | Helmfile |
 | <img src="https://traefik.io/favicon.ico" width="24" height="24"> | Whoami | Monitoring & Management | Simple service to display client information | Kubectl |
 | <img src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg" width="24" height="24"> | MinIO | Storage | S3-compatible object storage server | Helmfile |
 

@@ -1,0 +1,18 @@
+coder:
+  env:
+    - name: CODER_PG_CONNECTION_URL
+      valueFrom:
+        secretKeyRef:
+          name: coder-credentials
+          key: pg-connection-url
+    - name: CODER_ACCESS_URL
+      value: "https://coder.zaman.lol"
+  service:
+    type: ClusterIP
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: "2"
+      memory: 2Gi

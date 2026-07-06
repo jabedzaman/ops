@@ -1,0 +1,25 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: coder
+    namespace: coder
+    chart: coder/coder
+    version: ~2.34.0
+    values:
+      - values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "namespace.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "sealed-secret.yaml"

@@ -1,0 +1,13 @@
+auth:
+  username: coder
+  database: coder
+  existingSecret: postgres-credentials
+  secretKeys:
+    adminPasswordKey: postgres-password
+    userPasswordKey: password
+
+primary:
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 5Gi

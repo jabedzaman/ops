@@ -2,10 +2,10 @@ bases:
   - ../../bases/repositories.yaml
 
 releases:
-  - name: rancher
-    namespace: cattle-system
-    chart: rancher-stable/rancher
-    version: ~2.13.0
+  - name: postgres
+    namespace: postgres
+    chart: bitnami/postgresql
+    version: ~18.0.0
     values:
       - values.yaml
     hooks:
@@ -16,10 +16,10 @@ releases:
           - "apply"
           - "-f"
           - "namespace.yaml"
-      - events: ["postsync"]
+      - events: ["presync"]
         showlogs: true
         command: "kubectl"
         args:
           - "apply"
           - "-f"
-          - "ingress-route.yaml"
+          - "sealed-secret.yaml"

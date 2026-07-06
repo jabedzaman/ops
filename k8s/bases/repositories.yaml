@@ -11,9 +11,9 @@ repositories:
     url: https://charts.min.io/
   - name: community-charts
     url: https://community-charts.github.io/helm-charts
-  - name: rancher-stable
-    url: https://releases.rancher.com/server-charts/stable
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
   - name: mongodb
     url: https://mongodb.github.io/helm-charts
+  - name: coder
+    url: https://helm.coder.com/v2
