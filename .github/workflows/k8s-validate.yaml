@@ -26,12 +26,12 @@ jobs:
           kubeconform -summary -output json \
             -schema-location default \
             -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
-            -skip SealedSecret,IngressRoute,Middleware \
-            k8s/manifests/
+            -skip SealedSecret,IngressRoute,IngressRouteTCP,Middleware,ServersTransport \
+            k8s/apps/ k8s/infra/
 
       - name: Validate Helm values (syntax check)
         run: |
-          for file in $(find k8s/helm/values -name "*.yaml" -type f); do
+          for file in $(find k8s/apps k8s/infra -name "values.yaml" -type f); do
             echo "Checking $file..."
             python3 -c "import yaml; yaml.safe_load(open('$file'))"
           done

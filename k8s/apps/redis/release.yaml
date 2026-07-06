@@ -1,0 +1,32 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: redis
+    namespace: redis
+    chart: bitnami/redis
+    version: ~24.0.0
+    values:
+      - values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "namespace.yaml"
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "sealed-secret.yaml"
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args:
+          - "apply"
+          - "-f"
+          - "ingress-route.yaml"

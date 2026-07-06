@@ -4,3 +4,7 @@
 ..bfg-report
 .DS_Store
 *.txt
+
+# Prevent accidental commit of unsealed secrets
+k8s/**/secret.yaml
+!k8s/**/secret.template.yaml

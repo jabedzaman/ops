@@ -4,7 +4,7 @@ This file provides specific instructions for Claude AI when working with this re
 
 ## Repository Context
 
-This is an infrastructure-as-code repository for a personal homelab running K3s Kubernetes. See `.vscode/agents.md` for complete architecture documentation.
+This is an infrastructure-as-code repository for a personal homelab running K3s Kubernetes.
 
 ## Critical Rules
 
@@ -19,24 +19,37 @@ This is an infrastructure-as-code repository for a personal homelab running K3s 
 
 1. **Use Sealed Secrets pattern** for any sensitive data
 2. **Follow existing file structure** - Check similar components for patterns
-3. **Create namespace manifests** in `k8s/manifests/namespaces/`
-4. **Use Longhorn storage class** for persistent volumes
-5. **Use Traefik IngressRoute** (not standard Ingress) with `certResolver: cloudflare`
-6. **Add presync hooks** in helmfile for namespaces and sealed secrets
+3. **Use Longhorn storage class** for persistent volumes
+4. **Use Traefik IngressRoute** (not standard Ingress) with `certResolver: cloudflare`
+5. **Add presync hooks** in helmfile for namespaces and sealed secrets
 
 ## File Patterns
 
-When adding a new Helm-managed application:
+When adding a new Helm-managed application, all files live together in one directory:
 
 ```
 k8s/
-├── helmfile.yaml                              # Add release here
-├── helm/values/<app>/values.yaml              # Helm values
-├── manifests/namespaces/<app>.yaml            # Namespace
-├── manifests/secrets/templates/<app>.template.yaml  # Secret template
-├── manifests/secrets/sealed-secrets/sealed-secret-<app>.yaml  # Sealed secret
-└── ingress-routes/<app>/<route>.yaml          # IngressRoute (if needed)
+├── helmfile.yaml
+├── infra/<name>/          # cluster infra (traefik, metallb, longhorn, sealed-secrets)
+│   ├── release.yaml       # helmfile release
+│   ├── release.lock
+│   ├── values.yaml
+│   ├── namespace.yaml
+│   ├── ingress-route.yaml
+│   ├── middleware.yaml
+│   ├── sealed-secret*.yaml
+│   └── secret.template.yaml
+└── apps/<name>/           # workloads
+    ├── release.yaml
+    ├── release.lock
+    ├── values.yaml
+    ├── namespace.yaml
+    ├── ingress-route.yaml
+    ├── sealed-secret.yaml
+    └── secret.template.yaml
 ```
+
+Paths in `release.yaml` hooks/values are relative to the release.yaml file. Since everything is co-located, use just the filename (e.g. `namespace.yaml`, not a long relative path).
 
 ## Domain Convention
 
@@ -72,5 +85,3 @@ EOF
 ## Contact
 
 Repository owner: **hi@jabed.dev**
-
-For detailed architecture, see: `.vscode/agents.md`

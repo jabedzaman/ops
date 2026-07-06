@@ -1,8 +1,6 @@
-# Helmfile - Main Configuration
-# All releases are imported from the releases/ directory
-
 bases:
   - bases/repositories.yaml
 
 helmfiles:
-  - path: releases/*/release.yaml
+  - path: infra/*/release.yaml
+  - path: apps/*/release.yaml

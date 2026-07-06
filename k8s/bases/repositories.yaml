@@ -17,5 +17,3 @@ repositories:
     url: https://charts.bitnami.com/bitnami
   - name: mongodb
     url: https://mongodb.github.io/helm-charts
-  - name: twingate
-    url: https://twingate.github.io/helm-charts
