@@ -20,12 +20,6 @@ ports:
         - main: lab.jabed.dev
           sans:
             - "*.lab.jabed.dev"
-  redis:
-    port: 6379
-    expose:
-      default: true
-    exposedPort: 6379
-    protocol: TCP
   mongodb:
     port: 27017
     expose:
