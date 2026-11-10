@@ -1,8 +1,6 @@
 repositories:
   - name: traefik
     url: https://traefik.github.io/charts
-  - name: metallb
-    url: https://metallb.github.io/metallb
   - name: sealed-secrets
     url: https://bitnami-labs.github.io/sealed-secrets
   - name: longhorn

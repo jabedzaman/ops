@@ -5,7 +5,7 @@ This repository documents my infrastructure-as-code configurations for managing 
 ## Architecture
 
 - `k3s` is used as the Kubernetes distribution for my homelab environment.
-- `metallb` provides load balancing for services within the k3s cluster.
+- k3s' built-in ServiceLB (klipper-lb) provides LoadBalancer services within the k3s cluster.
 - `traefik` serves as the ingress controller and reverse proxy for routing external traffic to services.
 - `longhorn` is utilized for distributed block storage across the k3s nodes.
 - `sealed-secrets` manages encrypted secrets within the Kubernetes cluster.

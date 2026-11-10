@@ -23,8 +23,6 @@ ports:
     protocol: TCP
 service:
   type: LoadBalancer
-  annotations:
-    metallb.universe.tf/address-pool: public-ip-pool
 ingressRoute:
   dashboard:
     enabled: true

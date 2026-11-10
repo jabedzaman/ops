@@ -30,7 +30,7 @@ When adding a new Helm-managed application, all files live together in one direc
 ```
 k8s/
 ├── helmfile.yaml
-├── infra/<name>/          # cluster infra (traefik, metallb, longhorn, sealed-secrets)
+├── infra/<name>/          # cluster infra (traefik, longhorn, sealed-secrets)
 │   ├── release.yaml       # helmfile release
 │   ├── release.lock
 │   ├── values.yaml

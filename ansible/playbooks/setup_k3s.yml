@@ -3,7 +3,7 @@
   become: 'yes'
   gather_facts: 'yes'
   tasks:
-    - name: Install K3s with Traefik & ServiceLB disabled
+    - name: Install K3s with Traefik disabled (ServiceLB kept for LoadBalancer services)
       ansible.builtin.shell: "curl -sfL https://get.k3s.io | sh -s - --disable=traefik\
         \ \n"
       args:
