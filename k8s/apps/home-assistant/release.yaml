@@ -1,0 +1,27 @@
+bases:
+  - ../../bases/repositories.yaml
+
+releases:
+  - name: home-assistant
+    namespace: home-assistant
+    chart: pajikos/home-assistant
+    version: ~0.3.91
+    values:
+      - values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "namespace.yaml"]
+      # No secrets needed today (admin user is created during onboarding).
+      # Drop sealed-secret-*.yaml files here later (e.g. MQTT creds) and they'll be applied.
+      - events: ["presync"]
+        showlogs: true
+        command: "sh"
+        args:
+          - "-c"
+          - "for f in sealed-secret-*.yaml; do [ -e \"$f\" ] && kubectl apply -f \"$f\"; done; true"
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "ingress-route.yaml"]

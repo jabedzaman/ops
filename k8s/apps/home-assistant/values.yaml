@@ -1,0 +1,44 @@
+# Runs as a StatefulSet; /config lives on a local-path PVC.
+env:
+  - name: TZ
+    value: Asia/Kolkata
+
+# WSL runs in mirrored networking mode, so the node shares the LAN. hostNetwork
+# lets HA do mDNS discovery (Tapo etc.) and advertise the HomeKit Bridge
+# (TCP 21064) to Apple Home. HA listens directly on the node's port 8123.
+hostNetwork: true
+# Use the node's resolvers, not CoreDNS: under WSL mirrored mode the host
+# can't reach ClusterIPs (10.43.x), so ClusterFirstWithHostNet breaks all DNS.
+dnsPolicy: Default
+
+service:
+  type: ClusterIP
+  port: 8080
+
+# Routing is done by our own Traefik IngressRoute (ingress-route.yaml).
+# `external: true` creates no Ingress but still renders the reverse-proxy
+# settings (use_x_forwarded_for + trusted_proxies) so HA accepts Traefik's requests.
+ingress:
+  enabled: false
+  external: true
+
+configuration:
+  enabled: true
+  trusted_proxies:
+    - 10.42.0.0/16 # k3s pod CIDR (Traefik pods)
+    # With hostNetwork, Traefik -> HA traffic is SNATed to the node's LAN IP.
+    # Only applied on fresh installs; existing installs keep /config/.storage/http
+    # (edit via Settings -> System -> Network, or that file).
+    - 192.168.1.36/32
+
+persistence:
+  enabled: true
+  storageClass: local-path
+  size: 5Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi

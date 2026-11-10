@@ -3,3 +3,5 @@ repositories:
     url: https://traefik.github.io/charts
   - name: sealed-secrets
     url: https://bitnami.github.io/sealed-secrets
+  - name: pajikos
+    url: http://pajikos.github.io/home-assistant-helm-chart/
