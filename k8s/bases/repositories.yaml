@@ -2,7 +2,7 @@ repositories:
   - name: traefik
     url: https://traefik.github.io/charts
   - name: sealed-secrets
-    url: https://bitnami-labs.github.io/sealed-secrets
+    url: https://bitnami.github.io/sealed-secrets
   - name: longhorn
     url: https://charts.longhorn.io
   - name: minio
