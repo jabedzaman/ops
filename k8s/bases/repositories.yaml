@@ -3,7 +3,3 @@ repositories:
     url: https://traefik.github.io/charts
   - name: sealed-secrets
     url: https://bitnami.github.io/sealed-secrets
-  - name: longhorn
-    url: https://charts.longhorn.io
-  - name: mongodb
-    url: https://mongodb.github.io/helm-charts

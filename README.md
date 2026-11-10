@@ -7,11 +7,12 @@ This repository documents my infrastructure-as-code configurations for managing 
 - `k3s` is used as the Kubernetes distribution for my homelab environment.
 - k3s' built-in ServiceLB (klipper-lb) provides LoadBalancer services within the k3s cluster.
 - `traefik` serves as the ingress controller and reverse proxy for routing external traffic to services.
-- `longhorn` is utilized for distributed block storage across the k3s nodes.
+- k3s' built-in `local-path` provisioner provides persistent storage (single node).
 - `sealed-secrets` manages encrypted secrets within the Kubernetes cluster.
-- `letsencrypt` is configured for wildcard SSL certificates for secure access to services.
+- `letsencrypt` issues a wildcard `*.lab.jabed.dev` certificate via Cloudflare DNS-01.
+- `tailscale` is how services are reached: `*.lab.jabed.dev` resolves to the node's Tailscale IP, so they're only reachable from the tailnet — no ports exposed publicly.
 - `ansible` is employed for automating server configuration and management.
-- `terraform` manages cloud infrastructure including Cloudflare DNS and GitHub settings.
+- `terraform` manages the `*.lab.jabed.dev` Cloudflare DNS record.
 
 ## Structure
 
@@ -24,6 +25,5 @@ This repository documents my infrastructure-as-code configurations for managing 
 
 | Icon | Name | Category | Description | Deployed Via |
 |------|------|----------|-------------|--------------|
-| <img src="https://www.mongodb.com/favicon.ico" width="24" height="24"> | MongoDB | Databases | Managed MongoDB database hosting | MongoDB Operator |
 | <img src="https://traefik.io/favicon.ico" width="24" height="24"> | Whoami | Monitoring & Management | Simple service to display client information | Kubectl |
 

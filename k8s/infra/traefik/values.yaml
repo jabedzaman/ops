@@ -20,12 +20,6 @@ ports:
         - main: lab.jabed.dev
           sans:
             - "*.lab.jabed.dev"
-  mongodb:
-    port: 27017
-    expose:
-      default: true
-    exposedPort: 27017
-    protocol: TCP
 service:
   type: LoadBalancer
 ingressRoute:

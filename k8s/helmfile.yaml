@@ -3,4 +3,6 @@ bases:
 
 helmfiles:
   - path: infra/*/release.yaml
-  - path: apps/*/release.yaml
+  # Re-add once an app under apps/ has a release.yaml (helmfile errors on a
+  # glob with no matches; apps/whoami is plain manifests, applied with kubectl):
+  # - path: apps/*/release.yaml

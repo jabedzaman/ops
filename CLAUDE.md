@@ -19,7 +19,7 @@ This is an infrastructure-as-code repository for a personal homelab running K3s 
 
 1. **Use Sealed Secrets pattern** for any sensitive data
 2. **Follow existing file structure** - Check similar components for patterns
-3. **Use Longhorn storage class** for persistent volumes
+3. **Use the default `local-path` storage class** for persistent volumes (single-node cluster)
 4. **Use Traefik IngressRoute** (not standard Ingress) with `certResolver: cloudflare`
 5. **Add presync hooks** in helmfile for namespaces and sealed secrets
 
@@ -30,7 +30,7 @@ When adding a new Helm-managed application, all files live together in one direc
 ```
 k8s/
 ├── helmfile.yaml
-├── infra/<name>/          # cluster infra (traefik, longhorn, sealed-secrets)
+├── infra/<name>/          # cluster infra (traefik, sealed-secrets)
 │   ├── release.yaml       # helmfile release
 │   ├── release.lock
 │   ├── values.yaml

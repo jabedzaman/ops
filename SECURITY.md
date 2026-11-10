@@ -47,7 +47,7 @@ This security policy applies to:
 ### Out of Scope
 
 - Vulnerabilities in third-party Helm charts (report to upstream maintainers)
-- Vulnerabilities in K3s, Traefik, Longhorn, etc. (report to respective projects)
+- Vulnerabilities in K3s, Traefik, etc. (report to respective projects)
 - Issues that require physical access to the infrastructure
 
 ## Security Best Practices in This Repository
