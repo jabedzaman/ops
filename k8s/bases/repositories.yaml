@@ -13,5 +13,3 @@ repositories:
     url: https://charts.bitnami.com/bitnami
   - name: mongodb
     url: https://mongodb.github.io/helm-charts
-  - name: coder
-    url: https://helm.coder.com/v2
