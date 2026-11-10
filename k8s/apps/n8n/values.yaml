@@ -10,13 +10,13 @@ existingEncryptionKeySecret: n8n-secrets
 # Main n8n configuration
 main:
   # Editor URL for OAuth callbacks
-  editorBaseUrl: "https://n8n.zaman.lol"
+  editorBaseUrl: "https://n8n.lab.jabed.dev"
 
   # Extra environment variables for webhook URL
   extraEnvVars:
-    WEBHOOK_URL: "https://n8n.zaman.lol/"
+    WEBHOOK_URL: "https://n8n.lab.jabed.dev/"
     N8N_PROTOCOL: "https"
-    N8N_HOST: "n8n.zaman.lol"
+    N8N_HOST: "n8n.lab.jabed.dev"
 
   persistence:
     enabled: true

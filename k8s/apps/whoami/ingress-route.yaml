@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami.zaman.lol`)
+    - match: Host(`whoami.lab.jabed.dev`)
       kind: Rule
       services:
         - name: whoami
@@ -15,6 +15,6 @@ spec:
   tls:
     certResolver: cloudflare
     domains:
-      - main: zaman.lol
+      - main: lab.jabed.dev
         sans:
-          - "*.zaman.lol"
+          - "*.lab.jabed.dev"

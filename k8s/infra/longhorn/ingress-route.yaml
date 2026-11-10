@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`longhorn.zaman.lol`)
+    - match: Host(`longhorn.lab.jabed.dev`)
       kind: Rule
       services:
         - name: longhorn-frontend

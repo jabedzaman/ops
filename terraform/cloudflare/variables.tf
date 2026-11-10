@@ -9,12 +9,12 @@ variable "cloudflare_api_token" {
 }
 
 variable "cloudflare_zone_id" {
-  description = "Cloudflare Zone ID for the domain"
+  description = "Cloudflare Zone ID for jabed.dev"
   type        = string
 }
 
-variable "homelab_ip" {
-  description = "Public IP address of the homelab server"
+variable "lab_ip" {
+  description = "Homelab's Tailscale IP that *.lab.jabed.dev resolves to"
   type        = string
   sensitive   = true
 }

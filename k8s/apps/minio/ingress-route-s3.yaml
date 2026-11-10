@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`s3.zaman.lol`)
+    - match: Host(`s3.lab.jabed.dev`)
       kind: Rule
       services:
         - name: minio

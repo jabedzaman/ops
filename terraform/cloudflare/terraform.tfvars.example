@@ -2,8 +2,8 @@
 # Create at: https://dash.cloudflare.com/profile/api-tokens
 cloudflare_api_token = ""
 
-# Zone ID from Cloudflare dashboard (Overview page, right sidebar)
+# Zone ID for jabed.dev (Cloudflare dashboard -> Overview, right sidebar)
 cloudflare_zone_id = ""
 
-# Public IP address of your homelab server
-homelab_ip = ""
+# Homelab's Tailscale IP (`tailscale ip -4` on the homelab machine)
+lab_ip = ""

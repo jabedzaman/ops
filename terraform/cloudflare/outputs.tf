@@ -7,12 +7,7 @@ output "zone_name" {
   value       = data.cloudflare_zone.main.name
 }
 
-output "root_record_hostname" {
-  description = "Root domain hostname"
-  value       = cloudflare_record.root.hostname
-}
-
-output "wildcard_record_hostname" {
-  description = "Wildcard record hostname"
-  value       = cloudflare_record.wildcard.hostname
+output "lab_wildcard_hostname" {
+  description = "Wildcard record hostname for homelab services"
+  value       = cloudflare_record.lab_wildcard.hostname
 }

@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`n8n.zaman.lol`)
+    - match: Host(`n8n.lab.jabed.dev`)
       kind: Rule
       services:
         - name: n8n

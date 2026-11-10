@@ -9,10 +9,21 @@ releases:
     values:
       - values.yaml
     hooks:
+      # Namespace + sealed secrets must exist before traefik starts: it reads
+      # CF_DNS_API_TOKEN from the cloudflare-api-token secret at boot.
       - events: ["presync"]
         showlogs: true
         command: "kubectl"
+        args: ["apply", "-f", "namespace.yaml"]
+      - events: ["presync"]
+        showlogs: true
+        command: "sh"
         args:
-          - "apply"
-          - "-f"
-          - "middleware.yaml"
+          - "-c"
+          - "for f in sealed-secret-*.yaml; do [ -e \"$f\" ] && kubectl apply -f \"$f\"; done; true"
+      # Middleware is a traefik CRD, so it can only be applied after the chart
+      # has installed the CRDs.
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "middleware.yaml"]

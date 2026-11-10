@@ -53,7 +53,7 @@ Paths in `release.yaml` hooks/values are relative to the release.yaml file. Sinc
 
 ## Domain Convention
 
-All services use: `<service>.zaman.lol`
+All services use: `<service>.lab.jabed.dev`
 
 ## Common Tasks
 

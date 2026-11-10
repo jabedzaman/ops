@@ -1,6 +1,17 @@
 # Cloudflare DNS Terraform Configuration
 
-Manages DNS records for `zaman.lol` via Cloudflare API.
+Manages the homelab's DNS record in the `jabed.dev` zone via Cloudflare API:
+`*.lab.jabed.dev` → the homelab's Tailscale IP (DNS-only, not proxied), so every
+service is reachable as `<service>.lab.jabed.dev` from tailnet devices only.
+
+Only this one record is managed — the rest of the `jabed.dev` zone is untouched.
+
+> The record was first created by hand in the dashboard. Before the first
+> `terraform apply`, import it so Terraform doesn't try to create a duplicate:
+>
+> ```bash
+> terraform import cloudflare_record.lab_wildcard <zone-id>/<record-id>
+> ```
 
 ## Prerequisites
 
@@ -20,7 +31,7 @@ Manages DNS records for `zaman.lol` via Cloudflare API.
    ```hcl
    cloudflare_api_token = "your-api-token"
    cloudflare_zone_id   = "your-zone-id"
-   homelab_ip           = "your-public-ip"
+   lab_ip               = "your-tailscale-ip"
    ```
 
    > Never commit `terraform.tfvars` - it's gitignored.

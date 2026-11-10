@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`minio.zaman.lol`)
+    - match: Host(`minio.lab.jabed.dev`)
       kind: Rule
       services:
         - name: minio-console
