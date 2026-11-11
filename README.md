@@ -26,5 +26,4 @@ This repository documents my infrastructure-as-code configurations for managing 
 | Icon | Name | Category | Description | Deployed Via |
 |------|------|----------|-------------|--------------|
 | <img src="https://traefik.io/favicon.ico" width="24" height="24"> | Whoami | Monitoring & Management | Simple service to display client information | Kubectl |
-
 | <img src="https://www.home-assistant.io/images/favicon-192x192.png" width="24" height="24"> | Home Assistant | Home Automation | Smart home hub (TP-Link/Tapo devices, exposed to Apple Home via HomeKit Bridge) | Helmfile |
