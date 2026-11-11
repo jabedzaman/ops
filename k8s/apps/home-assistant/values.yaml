@@ -11,6 +11,23 @@ hostNetwork: true
 # and this keeps working on nodes where the host can't reach ClusterIPs.
 dnsPolicy: Default
 
+# Bluetooth: HA talks to the host's BlueZ over D-Bus; NET_ADMIN/NET_RAW let it
+# manage/recover the adapter. Requires bluez running on the node.
+securityContext:
+  capabilities:
+    add: ["NET_ADMIN", "NET_RAW"]
+
+additionalVolumes:
+  - name: dbus
+    hostPath:
+      path: /run/dbus
+      type: Directory
+
+additionalMounts:
+  - name: dbus
+    mountPath: /run/dbus
+    readOnly: true
+
 service:
   type: ClusterIP
   port: 8080
