@@ -21,7 +21,8 @@ This is an infrastructure-as-code repository for a personal homelab running K3s 
 2. **Follow existing file structure** - Check similar components for patterns
 3. **Use the default `local-path` storage class** for persistent volumes (single-node cluster)
 4. **Use Traefik IngressRoute** (not standard Ingress) with `certResolver: cloudflare`
-5. **Add presync hooks** in helmfile for namespaces and sealed secrets
+5. **Inherit the `default` template** (`k8s/bases/templates.yaml`) in every release instead of writing hooks
+6. **Keep the repo host-agnostic** - the current node happens to be WSL2; don't add WSL-specific config or docs
 
 ## File Patterns
 
@@ -46,10 +47,31 @@ k8s/
     ├── namespace.yaml
     ├── ingress-route.yaml
     ├── sealed-secret.yaml
-    └── secret.template.yaml
+    ├── secret.template.yaml
+    └── manifests/         # plain manifests instead of a chart (`chart: ./manifests`)
 ```
 
-Paths in `release.yaml` hooks/values are relative to the release.yaml file. Since everything is co-located, use just the filename (e.g. `namespace.yaml`, not a long relative path).
+Every release inherits the `default` template from `k8s/bases/templates.yaml`, which applies (only if present, from the release's directory):
+- presync: `namespace.yaml`, `sealed-secret*.yaml`
+- postsync: `ingress-route.yaml`, `middleware.yaml`
+
+So following the file names above is all the wiring needed. Minimal `release.yaml`:
+
+```yaml
+bases:
+  - ../../bases/repositories.yaml
+  - ../../bases/templates.yaml
+
+releases:
+  - name: <app>
+    namespace: <app>
+    chart: <repo>/<chart>
+    version: <version>
+    inherit:
+      - template: default
+    values:
+      - values.yaml
+```
 
 ## Domain Convention
 
@@ -63,9 +85,9 @@ All services use: `<service>.lab.jabed.dev`
 2. Create secret template (for documentation)
 3. Generate and seal the actual secret
 4. Create Helm values file
-5. Add release to helmfile.yaml with presync hooks
+5. Create `release.yaml` inheriting the `default` template (picked up by the `apps/*/release.yaml` glob)
 6. Create IngressRoute if web-accessible
-7. Deploy with `helmfile -l name=<app> sync`
+7. Deploy with `task deploy APP=<app>` (or `helmfile -f k8s/helmfile.yaml -l name=<app> sync`)
 
 ### Sealing a Secret
 

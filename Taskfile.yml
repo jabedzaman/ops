@@ -1,0 +1,35 @@
+# https://taskfile.dev — run `task --list`
+version: "3"
+
+vars:
+  HELMFILE: helmfile -f k8s/helmfile.yaml
+
+tasks:
+  bootstrap:
+    desc: Set up a fresh node (k3s, ufw, ssh, tools) with Ansible
+    dir: ansible
+    cmds:
+      - ansible-playbook -i inventories/hosts.ini -K site.yml
+
+  diff:
+    desc: Show pending changes (APP=<name> for one release)
+    cmds:
+      - "{{.HELMFILE}} {{if .APP}}-l name={{.APP}}{{end}} diff --suppress-secrets"
+
+  deploy:
+    desc: Sync releases (APP=<name> for one release)
+    cmds:
+      - "{{.HELMFILE}} {{if .APP}}-l name={{.APP}}{{end}} sync"
+
+  seal:
+    desc: "Seal a plain Secret manifest: task seal IN=secret.yaml OUT=sealed-secret.yaml"
+    requires:
+      vars: [IN, OUT]
+    cmds:
+      - kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets --format yaml < {{.IN}} > {{.OUT}}
+
+  lint:
+    desc: Lint YAML and render all releases
+    cmds:
+      - yamllint -c .yamllint ansible/ k8s/
+      - "{{.HELMFILE}} template > /dev/null"

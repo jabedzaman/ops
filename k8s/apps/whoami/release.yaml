@@ -1,0 +1,10 @@
+bases:
+  - ../../bases/templates.yaml
+
+releases:
+  # Plain manifests in manifests/, packaged into a chart by helmfile.
+  - name: whoami
+    namespace: whoami
+    chart: ./manifests
+    inherit:
+      - template: default

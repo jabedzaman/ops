@@ -3,12 +3,12 @@ env:
   - name: TZ
     value: Asia/Kolkata
 
-# WSL runs in mirrored networking mode, so the node shares the LAN. hostNetwork
-# lets HA do mDNS discovery (Tapo etc.) and advertise the HomeKit Bridge
-# (TCP 21064) to Apple Home. HA listens directly on the node's port 8123.
+# hostNetwork puts HA on the LAN: needed for device discovery (mDNS/broadcast)
+# and to advertise the HomeKit Bridge (TCP 21064) to Apple Home.
+# HA listens directly on the node's port 8123.
 hostNetwork: true
-# Use the node's resolvers, not CoreDNS: under WSL mirrored mode the host
-# can't reach ClusterIPs (10.43.x), so ClusterFirstWithHostNet breaks all DNS.
+# Use the node's resolvers rather than CoreDNS. HA doesn't need cluster DNS,
+# and this keeps working on nodes where the host can't reach ClusterIPs.
 dnsPolicy: Default
 
 service:
@@ -26,7 +26,8 @@ configuration:
   enabled: true
   trusted_proxies:
     - 10.42.0.0/16 # k3s pod CIDR (Traefik pods)
-    # With hostNetwork, Traefik -> HA traffic is SNATed to the node's LAN IP.
+    # Node IP: with hostNetwork, Traefik -> HA traffic arrives from it.
+    # Update when the node changes.
     # Only applied on fresh installs; existing installs keep /config/.storage/http
     # (edit via Settings -> System -> Network, or that file).
     - 192.168.1.36/32

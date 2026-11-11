@@ -1,0 +1,19 @@
+# Shared release template. Hooks run from the release.yaml's directory and
+# only apply the files that exist there:
+#   presync:  namespace.yaml, sealed-secret*.yaml (must exist before the chart starts)
+#   postsync: ingress-route.yaml, middleware.yaml (Traefik CRDs, applied after install)
+templates:
+  default:
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "sh"
+        args:
+          - "-c"
+          - "for f in namespace.yaml sealed-secret*.yaml; do [ -e \"$f\" ] && kubectl apply -f \"$f\"; done; true"
+      - events: ["postsync"]
+        showlogs: true
+        command: "sh"
+        args:
+          - "-c"
+          - "for f in ingress-route.yaml middleware.yaml; do [ -e \"$f\" ] && kubectl apply -f \"$f\"; done; true"
